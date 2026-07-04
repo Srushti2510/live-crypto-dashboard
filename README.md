@@ -1,24 +1,23 @@
-# JavaScript Learning Journey 🚀
+# 🚀 JavaScript Bootcamp
 
-Welcome to my JavaScript learning repository.
+Daily JavaScript learning for frontend development and internship preparation.
 
-## Progress
+## 📅 Progress
 
-- [ ] Day 1 – Variables & Data Types
-- [ ] Day 2 – Operators & Conditionals
-- [ ] Day 3 – Loops
-- [ ] Day 4 – Functions
-- [ ] Day 5 – Arrays
-- [ ] Day 6 – Objects
-- [ ] Day 7 – Mini Project
+### Day 01
+- ✅ Variables
+- ✅ Data Types
+- ✅ typeof
+- ✅ null & undefined
+- ✅ Type Conversion
 
-## Projects
+### Upcoming
+- ⏳ Operators
+- ⏳ Comparison Operators
+- ⏳ if-else
+- ⏳ Loops
 
-- Calculator
-- To-do App
-- Weather App
-- Expense Tracker
-
-## Goal
-
-Learn JavaScript from scratch in 30 days while coding every day.
+## 🎯 Goal
+- Master modern JavaScript.
+- Build projects using JavaScript.
+- Become internship-ready for frontend development.
