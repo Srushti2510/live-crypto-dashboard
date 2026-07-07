@@ -1,13 +1,15 @@
 # 🚀 Internship Bootcamp
 
 ## 🎯 Goal
-Become internship-ready with strong JavaScript, DSA, and MERN skills.
+Become internship-ready with strong JavaScript, DSA, React, and MERN skills.
 
 ---
 
 ## 📅 Progress
 
 ### ✅ Day 1
+- Variables
+- Data Types
 - Comparison Operators
 - == vs ===
 - if, if-else, else if
@@ -16,29 +18,41 @@ Become internship-ready with strong JavaScript, DSA, and MERN skills.
 - for loops
 - while loops
 - break & continue
-- Multiplication Table
-- Sum of 1–10
-- Countdown
-- Logic Practice (if-else)
+- Logic Practice
+
+### ✅ Day 3
+- Functions
+- Function Parameters
+- Return Statements
+- Function Practice
+
+### ✅ Day 4
+- Arrays
+- Array Traversal
+- Largest Element
+- Smallest Element
+- Sum of Array
+- Average of Array
+- Reverse Traversal
+- push()
+- pop()
+- shift()
+- unshift()
+- includes()
+- indexOf()
+- Array Practice
 
 ---
 
-## 💻 Next Topics
+## 💻 Upcoming Topics
 
 ### JavaScript
-- [ ] Functions
-- [ ] Arrays
 - [ ] Objects
 - [ ] DOM
 - [ ] Events
 - [ ] Async JavaScript
-
-### DSA
-- [ ] Arrays
-- [ ] Strings
-- [ ] Sorting
-- [ ] Searching
-- [ ] Recursion
+- [ ] ES6+
+- [ ] Fetch API
 
 ### Projects
 - [ ] Calculator
@@ -52,6 +66,7 @@ Become internship-ready with strong JavaScript, DSA, and MERN skills.
 ## 💚 Bootcamp Rules
 
 - Attempt first.
+- Understand the logic before the code.
 - Ask "Why?" not just "How?"
 - Consistency > Perfection.
 - One green square every day.
@@ -66,4 +81,4 @@ Become internship-ready with strong JavaScript, DSA, and MERN skills.
 
 ## 📈 Dream
 
-By the end of this journey, I want to look back at today's code and smile because of how much I've grown.
+Become internship-ready, build real-world projects, and land a software development internship.
