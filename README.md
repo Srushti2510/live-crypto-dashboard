@@ -1,84 +1,24 @@
-# 🚀 Internship Bootcamp
+# Live Crypto Dashboard
 
-## 🎯 Goal
-Become internship-ready with strong JavaScript, DSA, React, and MERN skills.
+A lightweight, asynchronous JavaScript application that fetches real-time cryptocurrency data from the CoinGecko API and renders live market prices directly to the browser DOM.
 
----
+## 🚀 Features
+* **Live API Integration**: Fetches real-time financial data from the CoinGecko REST API.
+* **Asynchronous JavaScript**: Utilizes `async/await` and `fetch()` for non-blocking network requests.
+* **Data Transformation**: Uses the `.map()` array method to extract and format essential data points.
+* **Dynamic DOM Manipulation**: Injects structured HTML directly into the DOM based on live API responses.
 
-## 📅 Progress
+## 🛠️ Tech Stack
+* **HTML5**: Structural skeleton.
+* **Vanilla JavaScript (ES6+)**: Core logic, API fetching, and DOM injection.
+* **CoinGecko API**: External data source.
 
-### ✅ Day 1
-- Variables
-- Data Types
-- Comparison Operators
-- == vs ===
-- if, if-else, else if
+## 💻 How to Run Locally
 
-### ✅ Day 2
-- for loops
-- while loops
-- break & continue
-- Logic Practice
+1. Clone this repository to your local machine.
+2. Navigate to your project directory.
+3. Open the `index.html` file in your browser (using the Live Server extension in VS Code is recommended for real-time updates).
 
-### ✅ Day 3
-- Functions
-- Function Parameters
-- Return Statements
-- Function Practice
-
-### ✅ Day 4
-- Arrays
-- Array Traversal
-- Largest Element
-- Smallest Element
-- Sum of Array
-- Average of Array
-- Reverse Traversal
-- push()
-- pop()
-- shift()
-- unshift()
-- includes()
-- indexOf()
-- Array Practice
-
----
-
-## 💻 Upcoming Topics
-
-### JavaScript
-- [ ] Objects
-- [ ] DOM
-- [ ] Events
-- [ ] Async JavaScript
-- [ ] ES6+
-- [ ] Fetch API
-
-### Projects
-- [ ] Calculator
-- [ ] To-Do App
-- [ ] Weather App
-- [ ] Quiz App
-- [ ] Portfolio
-
----
-
-## 💚 Bootcamp Rules
-
-- Attempt first.
-- Understand the logic before the code.
-- Ask "Why?" not just "How?"
-- Consistency > Perfection.
-- One green square every day.
-
----
-
-## 🏆 Quote
-
-> "You don't need perfect days. You need consistent ones."
-
----
-
-## 📈 Dream
-
-Become internship-ready, build real-world projects, and land a software development internship.
+## 🗺️ Roadmap (Upcoming Features)
+* Implementation of CSS for a responsive, professional dashboard layout.
+* Advanced data filtering and sorting capabilities.
