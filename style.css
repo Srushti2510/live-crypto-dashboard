@@ -1,0 +1,52 @@
+/* 1. Dark Mode Background */
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+}
+
+/* 2. Flexbox Container (Handles the wrapping and centering) */
+#crypto-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 20px;
+    margin-top: 40px;
+    max-width: 1200px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 3. The Grey Cards */
+#crypto-container p {
+    background-color: #1e1e1e;
+    padding: 25px 40px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    border: 1px solid #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s;
+}
+
+/* 4. The Hover Effect */
+#crypto-container p:hover {
+    transform: translateY(-5px);
+    border-color: #f7931a;
+}
+
+/* 5. The Dynamic Colors */
+.green-text {
+    color: #4caf50;
+    font-weight: bold;
+    display: block;
+    margin-top: 8px;
+}
+
+.red-text {
+    color: #f44336;
+    font-weight: bold;
+    display: block;
+    margin-top: 8px;
+}
