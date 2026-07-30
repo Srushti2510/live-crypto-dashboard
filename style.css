@@ -7,6 +7,26 @@ body {
     padding: 50px;
 }
 
+/* Search Bar Styling */
+#search-bar {
+    padding: 12px 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* Make it glow orange when the user clicks inside to type */
+#search-bar:focus {
+    border-color: #f7931a; 
+}
+
 /* 2. Flexbox Container (Handles the wrapping and centering) */
 #crypto-container {
     display: flex;
