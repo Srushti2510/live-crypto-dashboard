@@ -70,3 +70,52 @@ body {
     display: block;
     margin-top: 8px;
 }
+/* Track Button Styling */
+.track-btn {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: transparent;
+    color: #f7931a;
+    border: 1px solid #f7931a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.track-btn:hover {
+    background-color: #f7931a;
+    color: #121212;
+}
+
+/* When a coin is saved, fill the button in */
+.track-btn.saved {
+    background-color: #f7931a;
+    color: #121212;
+}
+
+/* Portfolio Toggle Button */
+#portfolio-toggle {
+    display: block;
+    margin: 0 auto 30px auto;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#portfolio-toggle:hover {
+    background-color: #555;
+}
+
+/* We will trigger this class with JS when the portfolio mode is active */
+#portfolio-toggle.active-mode {
+    background-color: #f7931a;
+    color: #121212;
+    border-color: #f7931a;
+    font-weight: bold;
+}
