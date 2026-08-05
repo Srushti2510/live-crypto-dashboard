@@ -16,7 +16,11 @@ const getData = async () => {
         };
     });
     
-    updateUI(); // Call the master UI updater instead of raw render
+    // NEW LOGIC: Hide the skeletons and show the real data container
+    document.getElementById('skeleton-container').style.display = 'none';
+    document.getElementById('crypto-container').style.display = 'flex'; 
+    
+    updateUI(); 
 };
 
 const renderCoins = (coinsArray) => {

@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Dashboard</title>
+    <title>Live Crypto Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-<h1>Live Crypto Dashboard</h1>
 
+    <h1>Live Crypto Dashboard</h1>
+
+    <!-- Search and Filter Controls -->
     <input type="text" id="search-bar" placeholder="Search for a coin...">
-    
-    <!-- Add this new toggle button right here -->
     <button id="portfolio-toggle">View My Portfolio</button>
 
-    <div id="crypto-container">
-        Loading live data...
+    <!-- The Skeleton Loader Container (Visible by default while fetching) -->
+    <div id="skeleton-container">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- The Real Crypto Container (Hidden by default until data loads) -->
+    <div id="crypto-container" style="display: none;"></div>
 
+    <script src="script.js"></script>
 </body>
 </html>
