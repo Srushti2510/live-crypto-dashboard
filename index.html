@@ -22,9 +22,21 @@
         <div class="skeleton-card"></div>
     </div>
 
-    <!-- The Real Crypto Container (Hidden by default until data loads) -->
+
+<!-- The Real Crypto Container -->
     <div id="crypto-container" style="display: none;"></div>
 
+    <!-- NEW: The Chart Modal (Hidden by default) -->
+    <div id="chart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2 id="modal-coin-name">Coin History</h2>
+            <canvas id="coin-chart"></canvas>
+        </div>
+    </div>
+
+    <!-- NEW: Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
