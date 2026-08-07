@@ -13,6 +13,7 @@ A dynamic, real-time cryptocurrency tracking dashboard built entirely with Vanil
 *   **Asynchronous JavaScript:** Utilizes modern `async/await` and `fetch` logic for smooth network requests.
 *   **Auto-Refreshing Engine:** Implements `setInterval` to silently poll the API and update market prices behind the scenes.
 *   **Responsive Dark Mode UI:** Built with CSS Flexbox to ensure a clean, responsive layout that automatically wraps cards on smaller screens.
+*   **Client-Side Pagination:** Fetches the top 100 cryptocurrencies and uses array slicing to handle local pagination, ensuring peak browser performance by only rendering 10 DOM elements at a time.
 
 ## 🛠️ Technologies Used
 
