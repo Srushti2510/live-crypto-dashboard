@@ -190,3 +190,21 @@ body {
     width: 100%;
     margin-top: 15px;
 }
+
+/* Pagination Controls */
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    color: #aaa;
+    font-weight: bold;
+}
+
+#pagination-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
