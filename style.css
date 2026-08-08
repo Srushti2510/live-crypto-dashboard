@@ -94,8 +94,8 @@ button:hover {
     background: #e07d10;
 }
 
-/* Coin Card Styles */
-#crypto-container p {
+/* Updated Coin Card Styles */
+#crypto-container .coin-card {
     background-color: #222;
     padding: 20px;
     border-radius: 8px;
@@ -120,11 +120,6 @@ button:hover {
     background-color: #f7931a;
     color: #121212;
     font-weight: bold;
-}
-
-#skeleton-container p {
-    color: #aaa;
-    font-style: italic;
 }
 
 /* Modal Styles */
