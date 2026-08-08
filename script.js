@@ -3,12 +3,8 @@ let favorites = JSON.parse(localStorage.getItem('cryptoFavorites')) || [];
 let showingPortfolio = false; 
 let myChart = null; 
 
-// NEW: Pagination State
-let currentPage = 1;
-const coinsPerPage = 10;
-
-// CHANGED: URL now fetches top 100 coins instead of 10
-const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false';
+// Fetching Top 250 coins for a data-heavy scrollable dashboard
+const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false';
 
 const getData = async () => {
     const response = await fetch(url);
@@ -25,7 +21,6 @@ const getData = async () => {
     
     document.getElementById('skeleton-container').style.display = 'none';
     document.getElementById('crypto-container').style.display = 'flex'; 
-    document.getElementById('pagination-controls').style.display = 'flex'; // Show pagination
     
     updateUI(); 
 };
@@ -35,7 +30,7 @@ const renderCoins = (coinsArray) => {
     container.innerHTML = ''; 
     
     if (coinsArray.length === 0) {
-        container.innerHTML = '<p style="width: 100%; border: none; box-shadow: none;">No coins found!</p>';
+        container.innerHTML = '<p style="width: 100%; border: none; box-shadow: none; background: transparent;">No coins found!</p>';
         return;
     }
     
@@ -49,7 +44,8 @@ const renderCoins = (coinsArray) => {
         
         container.innerHTML += `
             <p>
-                <strong>${coin.name}</strong>: $${coin.price} <br>
+                <strong style="font-size: 1.1em;">${coin.name}</strong><br>
+                $${coin.price} <br>
                 <span class="${colorClass}">${changeSymbol}${coin.change.toFixed(2)}%</span>
                 <br>
                 <button class="${buttonClass}" onclick="toggleFavorite('${coin.name}')">${buttonText}</button>
@@ -80,23 +76,11 @@ const updateUI = () => {
         displayCoins = displayCoins.filter(coin => favorites.includes(coin.name));
     }
     
-    // NEW: Pagination Logic
-    const totalPages = Math.ceil(displayCoins.length / coinsPerPage);
-    if (currentPage > totalPages && totalPages > 0) currentPage = totalPages; 
-    
-    const startIndex = (currentPage - 1) * coinsPerPage;
-    const endIndex = startIndex + coinsPerPage;
-    const paginatedCoins = displayCoins.slice(startIndex, endIndex);
-    
-    renderCoins(paginatedCoins);
-
-    // Update Pagination UI
-    document.getElementById('page-indicator').innerText = `Page ${currentPage} of ${totalPages || 1}`;
-    document.getElementById('prev-btn').disabled = currentPage === 1;
-    document.getElementById('next-btn').disabled = currentPage === totalPages || totalPages === 0;
+    // Renders all matched items into the scrollable container at once
+    renderCoins(displayCoins);
 };
 
-// Chart logic remains unchanged
+// Chart logic
 const openChart = async (coinId, coinName) => {
     const modal = document.getElementById('chart-modal');
     modal.style.display = 'flex';
@@ -143,14 +127,10 @@ document.getElementById('close-modal').addEventListener('click', () => {
 });
 
 // Listeners
-document.getElementById('search-bar').addEventListener('input', () => {
-    currentPage = 1; // Reset to page 1 on search
-    updateUI();
-});
+document.getElementById('search-bar').addEventListener('input', updateUI);
 
 document.getElementById('portfolio-toggle').addEventListener('click', (event) => {
     showingPortfolio = !showingPortfolio; 
-    currentPage = 1; // Reset to page 1 on toggle
     
     if (showingPortfolio) {
         event.target.innerText = "Back to Live Market";
@@ -160,19 +140,6 @@ document.getElementById('portfolio-toggle').addEventListener('click', (event) =>
         event.target.classList.remove('active-mode');
     }
     updateUI(); 
-});
-
-// NEW: Pagination Listeners
-document.getElementById('prev-btn').addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage--;
-        updateUI();
-    }
-});
-
-document.getElementById('next-btn').addEventListener('click', () => {
-    currentPage++;
-    updateUI();
 });
 
 getData();

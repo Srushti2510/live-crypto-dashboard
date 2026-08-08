@@ -5,45 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Crypto Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Chart.js CDN for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div class="container">
+        <h1>Live Crypto Dashboard</h1>
+        
+        <div class="controls">
+            <input type="text" id="search-bar" placeholder="Search for a coin...">
+            <button id="portfolio-toggle">View My Portfolio</button>
+        </div>
+        
+        <div id="skeleton-container">
+            <p>Loading market data...</p>
+        </div>
 
-    <h1>Live Crypto Dashboard</h1>
-
-    <!-- Search and Filter Controls -->
-    <input type="text" id="search-bar" placeholder="Search for a coin...">
-    <button id="portfolio-toggle">View My Portfolio</button>
-
-    <!-- The Skeleton Loader Container (Visible by default while fetching) -->
-    <div id="skeleton-container">
-        <div class="skeleton-card"></div>
-        <div class="skeleton-card"></div>
-        <div class="skeleton-card"></div>
-        <div class="skeleton-card"></div>
+        <!-- The scrollable grid for 250 coins -->
+        <div id="crypto-container"></div>
     </div>
 
-    <!-- Pagination Controls (Hidden by default) -->
-    <div id="pagination-controls" style="display: none;">
-        <button id="prev-btn" class="track-btn">Previous</button>
-        <span id="page-indicator">Page 1</span>
-        <button id="next-btn" class="track-btn">Next</button>
-    </div>
-
-
-<!-- The Real Crypto Container -->
-    <div id="crypto-container" style="display: none;"></div>
-
-    <!-- NEW: The Chart Modal (Hidden by default) -->
-    <div id="chart-modal" class="modal">
+    <!-- Chart Modal (Hidden by default) -->
+    <div id="chart-modal" style="display: none;">
         <div class="modal-content">
-            <span class="close-btn" id="close-modal">&times;</span>
-            <h2 id="modal-coin-name">Coin History</h2>
+            <h2 id="modal-coin-name"></h2>
             <canvas id="coin-chart"></canvas>
+            <button id="close-modal">Close Chart</button>
         </div>
     </div>
 
-    <!-- NEW: Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
