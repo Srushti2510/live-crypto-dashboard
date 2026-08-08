@@ -40,6 +40,20 @@ h1 {
     outline: 1px solid #f7931a;
 }
 
+#currency-selector {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#currency-selector:focus {
+    outline: 1px solid #f7931a;
+}
+
 button {
     padding: 12px 18px;
     background-color: #2a2a2a;

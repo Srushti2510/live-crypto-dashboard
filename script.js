@@ -3,10 +3,18 @@ let favorites = JSON.parse(localStorage.getItem('cryptoFavorites')) || [];
 let showingPortfolio = false; 
 let myChart = null; 
 
-// Fetching Top 250 coins for a data-heavy scrollable dashboard
-const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false';
+// New State for Currency Management
+let currentCurrency = 'usd'; 
+const currencySymbols = { usd: '$', eur: '€', inr: '₹' };
 
 const getData = async () => {
+    // Show the skeleton loader while we fetch the new currency prices
+    document.getElementById('crypto-container').style.display = 'none';
+    document.getElementById('skeleton-container').style.display = 'block';
+
+    // The API URL is now dynamic based on the dropdown selection
+    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currentCurrency}&order=market_cap_desc&per_page=250&page=1&sparkline=false`;
+    
     const response = await fetch(url);
     const data = await response.json();
     
@@ -34,34 +42,33 @@ const renderCoins = (coinsArray) => {
         return;
     }
     
+    const symbol = currencySymbols[currentCurrency];
+    
     coinsArray.forEach(coin => {
         let colorClass = coin.change > 0 ? 'green-text' : 'red-text';
         let changeSymbol = coin.change > 0 ? '+' : '';
         
-        // Look up the coin in our new object array
         let savedData = favorites.find(fav => fav.name === coin.name);
-        let isSaved = !!savedData; // Returns true if savedData exists
+        let isSaved = !!savedData; 
         
         let buttonText = isSaved ? '⭐ Tracked' : '☆ Track';
         let buttonClass = isSaved ? 'track-btn saved' : 'track-btn';
         
-        // The Math Engine: Calculate Net Worth if in Portfolio Mode
         let portfolioHTML = '';
         if (showingPortfolio && isSaved) {
             let totalValue = (savedData.amount * coin.price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             portfolioHTML = `
                 <div style="margin: 15px 0; padding: 10px; background-color: #1a1a1a; border: 1px dashed #f7931a; border-radius: 6px;">
                     <small style="color: #aaa;">Holdings: ${savedData.amount}</small><br>
-                    <strong style="color: #f7931a; font-size: 1.1em;">Value: $${totalValue}</strong>
+                    <strong style="color: #f7931a; font-size: 1.1em;">Value: ${symbol}${totalValue}</strong>
                 </div>
             `;
         }
         
-        // Changed outer <p> to <div class="coin-card"> to fix HTML parsing bug
         container.innerHTML += `
             <div class="coin-card">
                 <strong style="font-size: 1.1em;">${coin.name}</strong><br>
-                $${coin.price.toLocaleString()} <br>
+                ${symbol}${coin.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 6 })} <br>
                 <span class="${colorClass}">${changeSymbol}${coin.change.toFixed(2)}%</span>
                 ${portfolioHTML}
                 <br>
@@ -73,28 +80,22 @@ const renderCoins = (coinsArray) => {
 };
 
 const toggleFavorite = (coinName) => {
-    // Check if the coin is already in our new object array
     const existingCoinIndex = favorites.findIndex(fav => fav.name === coinName);
 
     if (existingCoinIndex !== -1) {
-        // If it's already saved, remove it (Untrack)
         favorites.splice(existingCoinIndex, 1);
     } else {
-        // If it's not saved, ask the user how much they own
         let amount = prompt(`How much ${coinName} do you currently own?`, "0");
         
-        // Cancel if they hit escape or close the prompt
         if (amount === null || amount.trim() === "") return;
         
         amount = parseFloat(amount);
         
-        // Validate that they typed a real number
         if (isNaN(amount) || amount < 0) {
             alert("Please enter a valid number.");
             return;
         }
         
-        // Save both the name AND the amount
         favorites.push({ name: coinName, amount: amount });
     }
     
@@ -113,17 +114,16 @@ const updateUI = () => {
         displayCoins = displayCoins.filter(coin => favorites.some(fav => fav.name === coin.name));
     }
     
-    // Renders all matched items into the scrollable container at once
     renderCoins(displayCoins);
 };
 
-// Chart logic
 const openChart = async (coinId, coinName) => {
     const modal = document.getElementById('chart-modal');
     modal.style.display = 'flex';
     document.getElementById('modal-coin-name').innerText = `${coinName} (7-Day History)`;
 
-    const historyUrl = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`;
+    // Ensure the chart also fetches data in the newly selected currency
+    const historyUrl = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currentCurrency}&days=7`;
     const response = await fetch(historyUrl);
     const data = await response.json();
     
@@ -142,7 +142,7 @@ const openChart = async (coinId, coinName) => {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Price (USD)',
+                label: `Price (${currentCurrency.toUpperCase()})`,
                 data: prices,
                 borderColor: '#f7931a',
                 backgroundColor: 'rgba(247, 147, 26, 0.2)',
@@ -163,7 +163,6 @@ document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('chart-modal').style.display = 'none';
 });
 
-// Listeners
 document.getElementById('search-bar').addEventListener('input', updateUI);
 
 document.getElementById('portfolio-toggle').addEventListener('click', (event) => {
@@ -177,6 +176,12 @@ document.getElementById('portfolio-toggle').addEventListener('click', (event) =>
         event.target.classList.remove('active-mode');
     }
     updateUI(); 
+});
+
+// Currency Selector Listener
+document.getElementById('currency-selector').addEventListener('change', (event) => {
+    currentCurrency = event.target.value;
+    getData(); 
 });
 
 getData();

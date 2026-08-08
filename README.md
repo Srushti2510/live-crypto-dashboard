@@ -5,12 +5,12 @@ A high-performance, real-time cryptocurrency tracking dashboard built entirely w
 ## 🚀 Technical Features
 
 *   **High-Volume Data Rendering:** Efficiently fetches and renders real-time data for the top 250 cryptocurrencies, housed within a custom-styled, full-width scrollable viewport for maximum screen real estate.
+*   **Automated Portfolio Engine:** Features a custom mathematical engine that calculates real-time net worth by cross-referencing user-inputted holdings with live market prices.
+*   **Global Currency Selection:** Dynamically manipulates API endpoint parameters to fetch and display financial data in USD ($), EUR (€), or INR (₹) based on user selection.
+*   **Persistent State Management:** Utilizes the Web Storage API (`localStorage`) to allow users to save and track specific coins and quantities, ensuring custom portfolio data survives page refreshes and closed sessions.
 *   **Data Visualization:** Integrates **Chart.js** to render responsive, interactive line graphs displaying 7-day historical price trends inside a custom modal.
-*   **Persistent State Management:** Utilizes the Web Storage API (`localStorage`) to allow users to save and track specific coins, ensuring custom portfolio data survives page refreshes and closed sessions.
-*   **Live API Integration:** Fetches real-time cryptocurrency data (prices, 24h market changes, historical charts) using the asynchronous `fetch` API via the CoinGecko V3 endpoints.
-*   **Dynamic DOM Manipulation:** Features a "Portfolio View" toggle that instantly cross-references live API data with local memory to filter the UI in real-time, completely bypassing traditional page reloads.
+*   **Dynamic DOM Manipulation:** Features a "Portfolio View" toggle that instantly filters the UI in real-time, completely bypassing traditional page reloads.
 *   **Real-Time Search Engine:** Includes a custom search filter that parses the local data array as the user types, instantly redrawing the UI state to match the query.
-*   **Responsive UI/UX:** Built with a flexible CSS layout utilizing viewport heights (`vh`) and percentages to ensure the dashboard dynamically stretches and adapts to various screen sizes.
 
 ## 🛠️ Tech Stack
 
