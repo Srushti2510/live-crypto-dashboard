@@ -6,6 +6,7 @@ A high-performance, real-time cryptocurrency tracking dashboard built entirely w
 
 *   **High-Volume Data Rendering:** Efficiently fetches and renders real-time data for the top 250 cryptocurrencies, housed within a custom-styled, full-width scrollable viewport for maximum screen real estate.
 *   **Automated Portfolio Engine:** Features a custom mathematical engine that calculates real-time net worth by cross-referencing user-inputted holdings with live market prices.
+*   **Advanced Sorting Engine:** Implements client-side array sorting logic (`.sort()`), allowing users to instantly filter the dashboard by Top Gainers, Top Losers, and Price thresholds without triggering additional network requests.
 *   **Global Currency Selection:** Dynamically manipulates API endpoint parameters to fetch and display financial data in USD ($), EUR (€), or INR (₹) based on user selection.
 *   **Persistent State Management:** Utilizes the Web Storage API (`localStorage`) to allow users to save and track specific coins and quantities, ensuring custom portfolio data survives page refreshes and closed sessions.
 *   **Data Visualization:** Integrates **Chart.js** to render responsive, interactive line graphs displaying 7-day historical price trends inside a custom modal.
