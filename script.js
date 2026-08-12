@@ -3,16 +3,16 @@ let favorites = JSON.parse(localStorage.getItem('cryptoFavorites')) || [];
 let showingPortfolio = false; 
 let myChart = null; 
 
-// New State for Currency Management
 let currentCurrency = 'usd'; 
 const currencySymbols = { usd: '$', eur: '€', inr: '₹' };
 
+// Sorting State
+let currentSort = 'market_cap'; 
+
 const getData = async () => {
-    // Show the skeleton loader while we fetch the new currency prices
     document.getElementById('crypto-container').style.display = 'none';
     document.getElementById('skeleton-container').style.display = 'block';
 
-    // The API URL is now dynamic based on the dropdown selection
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currentCurrency}&order=market_cap_desc&per_page=250&page=1&sparkline=false`;
     
     const response = await fetch(url);
@@ -106,12 +106,25 @@ const toggleFavorite = (coinName) => {
 const updateUI = () => {
     const typedWord = document.getElementById('search-bar').value.toLowerCase();
     
+    // 1. Filter by Search
     let displayCoins = allCoins.filter(coin => 
         coin.name.toLowerCase().includes(typedWord)
     );
     
+    // 2. Filter by Portfolio
     if (showingPortfolio) {
         displayCoins = displayCoins.filter(coin => favorites.some(fav => fav.name === coin.name));
+    }
+    
+    // 3. The Advanced Sorting Engine
+    if (currentSort === 'gainers') {
+        displayCoins.sort((a, b) => b.change - a.change); 
+    } else if (currentSort === 'losers') {
+        displayCoins.sort((a, b) => a.change - b.change); 
+    } else if (currentSort === 'price_high') {
+        displayCoins.sort((a, b) => b.price - a.price); 
+    } else if (currentSort === 'price_low') {
+        displayCoins.sort((a, b) => a.price - b.price); 
     }
     
     renderCoins(displayCoins);
@@ -122,7 +135,6 @@ const openChart = async (coinId, coinName) => {
     modal.style.display = 'flex';
     document.getElementById('modal-coin-name').innerText = `${coinName} (7-Day History)`;
 
-    // Ensure the chart also fetches data in the newly selected currency
     const historyUrl = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currentCurrency}&days=7`;
     const response = await fetch(historyUrl);
     const data = await response.json();
@@ -163,6 +175,7 @@ document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('chart-modal').style.display = 'none';
 });
 
+// Event Listeners
 document.getElementById('search-bar').addEventListener('input', updateUI);
 
 document.getElementById('portfolio-toggle').addEventListener('click', (event) => {
@@ -178,10 +191,14 @@ document.getElementById('portfolio-toggle').addEventListener('click', (event) =>
     updateUI(); 
 });
 
-// Currency Selector Listener
 document.getElementById('currency-selector').addEventListener('change', (event) => {
     currentCurrency = event.target.value;
     getData(); 
+});
+
+document.getElementById('sort-selector').addEventListener('change', (event) => {
+    currentSort = event.target.value;
+    updateUI();
 });
 
 getData();

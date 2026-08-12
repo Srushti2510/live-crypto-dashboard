@@ -28,7 +28,7 @@ h1 {
 
 #search-bar {
     padding: 12px;
-    width: 60%;
+    width: 40%;
     border-radius: 6px;
     border: 1px solid #333;
     background-color: #1e1e1e;
@@ -40,7 +40,7 @@ h1 {
     outline: 1px solid #f7931a;
 }
 
-#currency-selector {
+#currency-selector, #sort-selector {
     padding: 12px;
     border-radius: 6px;
     border: 1px solid #333;
@@ -50,7 +50,7 @@ h1 {
     cursor: pointer;
 }
 
-#currency-selector:focus {
+#currency-selector:focus, #sort-selector:focus {
     outline: 1px solid #f7931a;
 }
 
@@ -108,7 +108,7 @@ button:hover {
     background: #e07d10;
 }
 
-/* Updated Coin Card Styles */
+/* Coin Card Styles */
 #crypto-container .coin-card {
     background-color: #222;
     padding: 20px;
