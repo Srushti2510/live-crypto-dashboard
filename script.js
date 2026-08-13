@@ -5,9 +5,21 @@ let myChart = null;
 
 let currentCurrency = 'usd'; 
 const currencySymbols = { usd: '$', eur: '€', inr: '₹' };
-
-// Sorting State
 let currentSort = 'market_cap'; 
+
+// NEW: Theme Persistence Logic
+const savedTheme = localStorage.getItem('cryptoTheme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+const updateThemeButtonText = (theme) => {
+    const btn = document.getElementById('theme-toggle');
+    if (theme === 'light') {
+        btn.innerText = '🌙 Dark Mode';
+    } else {
+        btn.innerText = '☀️ Light Mode';
+    }
+};
+updateThemeButtonText(savedTheme);
 
 const getData = async () => {
     document.getElementById('crypto-container').style.display = 'none';
@@ -58,8 +70,8 @@ const renderCoins = (coinsArray) => {
         if (showingPortfolio && isSaved) {
             let totalValue = (savedData.amount * coin.price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             portfolioHTML = `
-                <div style="margin: 15px 0; padding: 10px; background-color: #1a1a1a; border: 1px dashed #f7931a; border-radius: 6px;">
-                    <small style="color: #aaa;">Holdings: ${savedData.amount}</small><br>
+                <div class="portfolio-box">
+                    <small style="opacity: 0.7;">Holdings: ${savedData.amount}</small><br>
                     <strong style="color: #f7931a; font-size: 1.1em;">Value: ${symbol}${totalValue}</strong>
                 </div>
             `;
@@ -73,7 +85,7 @@ const renderCoins = (coinsArray) => {
                 ${portfolioHTML}
                 <br>
                 <button class="${buttonClass}" onclick="toggleFavorite('${coin.name}')">${buttonText}</button>
-                <button class="track-btn" style="margin-left: 5px; border-color: #888; color: #aaa;" onclick="openChart('${coin.id}', '${coin.name}')">📈 Chart</button>
+                <button class="track-btn" style="margin-left: 5px; border-color: #888;" onclick="openChart('${coin.id}', '${coin.name}')">📈 Chart</button>
             </div>
         `;
     });
@@ -106,17 +118,14 @@ const toggleFavorite = (coinName) => {
 const updateUI = () => {
     const typedWord = document.getElementById('search-bar').value.toLowerCase();
     
-    // 1. Filter by Search
     let displayCoins = allCoins.filter(coin => 
         coin.name.toLowerCase().includes(typedWord)
     );
     
-    // 2. Filter by Portfolio
     if (showingPortfolio) {
         displayCoins = displayCoins.filter(coin => favorites.some(fav => fav.name === coin.name));
     }
     
-    // 3. The Advanced Sorting Engine
     if (currentSort === 'gainers') {
         displayCoins.sort((a, b) => b.change - a.change); 
     } else if (currentSort === 'losers') {
@@ -199,6 +208,16 @@ document.getElementById('currency-selector').addEventListener('change', (event) 
 document.getElementById('sort-selector').addEventListener('change', (event) => {
     currentSort = event.target.value;
     updateUI();
+});
+
+// NEW: Theme Toggle Click Listener
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('cryptoTheme', newTheme);
+    updateThemeButtonText(newTheme);
 });
 
 getData();
