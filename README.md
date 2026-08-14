@@ -31,4 +31,4 @@ BlockPulse utilizes the Web Storage API (`localStorage`) heavily to create a per
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone [https://github.com/Srushti2510/BlockPulse_live-crypto-dashboard.git](https://github.com/Srushti2510/BlockPulse_live-crypto-dashboard.git)
+   git clone [https://github.com/Srushti2510/BlockPulse_live-crypto-dashboard.git](https://github.com/Srushti2510/BlockPulse_live-crypto-dashboard.git)git add README.md
