@@ -9,6 +9,7 @@ A premium, real-time cryptocurrency tracking dashboard built entirely with Vanil
 *   **High-Volume API Integration:** Efficiently fetches, parses, and renders real-time data, including live prices, 24h percentage changes, and official coin logos via the CoinGecko API v3.
 *   **Interactive 7-Day Charts:** Integrates **Chart.js** to render responsive, interactive line graphs displaying historical price trends inside a frosted-glass modal.
 *   **Quick Conversion Calculator:** Features a dynamic calculator widget that allows users to instantly multiply live market prices by custom holding amounts across 250 different assets.
+*   **CSV Portfolio Export:** Empowers users to download their locally saved portfolio data directly into a fully formatted `.csv` spreadsheet using front-end Blob generation.
 *   **Global Currency & Sorting Engine:** Dynamically manipulates API endpoint parameters to fetch data in USD ($), EUR (€), or INR (₹), and features client-side array sorting (`.sort()`) for Top Gainers, Losers, and Price thresholds.
 
 ## 💾 Local Storage & State Management
@@ -30,4 +31,4 @@ BlockPulse utilizes the Web Storage API (`localStorage`) heavily to create a per
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone [https://github.com/Srushti2510/live-crypto-dashboard.git](https://github.com/Srushti2510/live-crypto-dashboard.git)
+   git clone [https://github.com/Srushti2510/BlockPulse_live-crypto-dashboard.git](https://github.com/Srushti2510/BlockPulse_live-crypto-dashboard.git)
