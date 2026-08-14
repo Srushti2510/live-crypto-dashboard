@@ -3,54 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Crypto Dashboard</title>
+    <title>BlockPulse Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Chart.js CDN for data visualization -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Live Crypto Dashboard</h1>
+    
+    <div id="app-layout">
         
-        <div class="controls">
-            <input type="text" id="search-bar" placeholder="Search for a coin...">
+        <!-- THE SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">
+                <h2>BlockPulse.</h2>
+            </div>
+
+            <div class="sidebar-section">
+                <p class="section-title">Search & Filter</p>
+                <input type="text" id="search-bar" placeholder="Search coins...">
+                
+                <select id="currency-selector">
+                    <option value="usd">USD ($)</option>
+                    <option value="eur">EUR (€)</option>
+                    <option value="inr">INR (₹)</option>
+                </select>
+
+                <select id="sort-selector">
+                    <option value="market_cap">Rank (Default)</option>
+                    <option value="gainers">Top Gainers</option>
+                    <option value="losers">Top Losers</option>
+                    <option value="price_high">Price (High to Low)</option>
+                    <option value="price_low">Price (Low to High)</option>
+                </select>
+            </div>
+
+            <div class="sidebar-section">
+                <p class="section-title">Tools</p>
+                <button id="portfolio-toggle" class="sidebar-btn">View Portfolio</button>
+                <button id="calc-btn" class="sidebar-btn">Calculator</button>
+            </div>
+
+            <!-- Sidebar Footer with Upgraded User Greeting -->
+            <div class="sidebar-footer">
+                <div id="user-greeting-container" style="display: none; text-align: center; margin-bottom: 15px; font-size: 1.1rem; color: var(--text-muted);">
+                    Hello, <br>
+                    <strong id="sidebar-user-name" style="color: var(--accent-color); font-size: 1.3rem; display: inline-block; margin-top: 5px;"></strong>
+                </div>
+                <button id="theme-toggle" class="sidebar-btn">☀ Light Mode</button>
+            </div>
+        </aside>
+
+        <!-- THE MAIN CONTENT AREA -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Live Market Overview</h1>
+            </header>
             
-            <!-- Global Currency Selector -->
-            <select id="currency-selector">
-                <option value="usd">USD ($)</option>
-                <option value="eur">EUR (€)</option>
-                <option value="inr">INR (₹)</option>
-            </select>
+            <div id="skeleton-container">
+                <div class="loader"></div>
+                <p style="color: var(--text-muted); margin-top: 15px; text-align: center;">Syncing Live Market Data...</p>
+            </div>
 
-            <!-- Sorting Selector -->
-            <select id="sort-selector">
-                <option value="market_cap">Rank (Default)</option>
-                <option value="gainers">Top Gainers</option>
-                <option value="losers">Top Losers</option>
-                <option value="price_high">Price (High to Low)</option>
-                <option value="price_low">Price (Low to High)</option>
-            </select>
-            
-            <button id="portfolio-toggle">View My Portfolio</button>
+            <div id="crypto-container"></div>
+        </main>
 
-            <!-- NEW: Theme Toggle Button -->
-            <button id="theme-toggle">☀️ Light Mode</button>
-        </div>
-        
-        <div id="skeleton-container">
-            <p style="font-style: italic;">Loading market data...</p>
-        </div>
-
-        <!-- The scrollable grid for 250 coins -->
-        <div id="crypto-container"></div>
     </div>
 
-    <!-- Chart Modal (Hidden by default) -->
+    <!-- Welcome / Login Modal -->
+    <div id="welcome-modal" style="display: none;">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <h2 style="margin-bottom: 10px;">Welcome to <span style="color: var(--accent-color);">BlockPulse</span></h2>
+            <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem;">Enter your name to personalize your dashboard.</p>
+            <input type="text" id="user-name-input" placeholder="Your Name..." style="width: 100%; padding: 14px; border-radius: 8px; border: 1px solid var(--input-border); background-color: var(--input-bg); color: var(--text-color); margin-bottom: 20px; box-sizing: border-box; font-family: 'Inter', sans-serif;">
+            <button id="save-name-btn" class="sidebar-btn" style="background-color: var(--accent-color); color: white; width: 100%; padding: 14px;">Launch Dashboard</button>
+        </div>
+    </div>
+
+    <!-- Chart & Calc Modals -->
     <div id="chart-modal" style="display: none;">
         <div class="modal-content">
             <h2 id="modal-coin-name"></h2>
             <canvas id="coin-chart"></canvas>
-            <button id="close-modal">Close Chart</button>
+            <button id="close-modal" class="close-btn">Close Chart</button>
+        </div>
+    </div>
+
+    <div id="calc-modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Quick Crypto Calculator</h2>
+            <div style="margin: 20px 0; display: flex; flex-direction: column; gap: 12px;">
+                <select id="calc-coin-select" style="padding: 10px; border-radius: 6px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--input-border);"></select>
+                <input type="number" id="calc-amount" placeholder="Enter amount..." value="1" min="0" style="padding: 10px; border-radius: 6px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--input-border);">
+                <div style="padding: 15px; background: var(--portfolio-box-bg); border-radius: 6px; border: 1px dashed var(--accent-color); margin-top: 10px;">
+                    <span style="opacity: 0.7;">Estimated Value:</span>
+                    <h3 id="calc-result" style="color: var(--accent-color); margin: 5px 0 0 0; font-size: 1.5em;">$0.00</h3>
+                </div>
+            </div>
+            <button id="close-calc-modal" class="close-btn">Close Calculator</button>
         </div>
     </div>
 
